@@ -11,4 +11,9 @@ RUN dotnet publish -c release -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
+
+# copy Hdiv agent
+COPY ./hdiv/agent /opt/hdiv/agent
+COPY ./hdiv/env.properties /opt/hdiv/agent/
+
 ENTRYPOINT ["dotnet", "WebGoatCore.dll"] 
